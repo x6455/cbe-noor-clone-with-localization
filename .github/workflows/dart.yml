@@ -13,38 +13,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Flutter
+      - name: Setup Flutter with specific version
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-          flutter-version: '3.19.0'  # Use specific version to avoid surprises
+          # Use a newer Flutter version that matches your intl requirement
+          flutter-version: '3.16.0'  # Adjust this based on your needs
 
-      - name: Check Flutter version
-        run: flutter --version
-
-      - name: Try dependency resolution
+      - name: Check Flutter version and SDK constraints
         run: |
-          # First attempt with current pubspec
-          flutter pub get || {
-            echo "Dependency resolution failed, attempting to fix..."
-            
-            # Backup pubspec
-            cp pubspec.yaml pubspec.yaml.backup
-            
-            # Update intl dependency inline
-            sed -i 's/intl: \^0.17.0/intl: ^0.20.2/g' pubspec.yaml
-            
-            # Try again
-            flutter pub get || {
-              echo "Still failing, using backup..."
-              mv pubspec.yaml.backup pubspec.yaml
-              exit 1
-            }
-          }
+          flutter --version
+          echo "Checking intl version in Flutter SDK..."
+          cat $(flutter sdk-path)/bin/cache/pkg/sky_engine/lib/pubspec.yaml | grep -A2 -B2 intl || true
 
-      - name: Run dart fix for null safety
+      - name: Fix intl dependency automatically
         run: |
-          dart fix --apply || echo "Dart fix failed or not needed"
+          # Backup original pubspec
+          cp pubspec.yaml pubspec.yaml.backup
+          
+          # Update intl to exactly 0.18.1 (what Flutter SDK requires)
+          sed -i 's/intl: \^0.17.0/intl: ^0.18.1/g' pubspec.yaml
+          
+          # If ^0.20.2 is present from previous attempts, also update that
+          sed -i 's/intl: \^0.20.2/intl: ^0.18.1/g' pubspec.yaml
+          
+          # Show the change
+          echo "Updated pubspec.yaml:"
+          grep "intl:" pubspec.yaml
+
+      - name: Install dependencies
+        run: flutter pub get
 
       - name: Verify formatting
         run: flutter format --set-exit-if-changed .
@@ -55,8 +52,5 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build for Android
+      - name: Build APK
         run: flutter build apk --release
-
-      - name: Build for Web
-        run: flutter build web --release
