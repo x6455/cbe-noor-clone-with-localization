@@ -37,11 +37,13 @@ class _LoginPageState extends State<LoginPage> {
                 MyApp.setLocale(context, _isEn);
               },
               style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.r)),
-                  fixedSize: Size(55.r, 35.r),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  minimumSize: Size.zero),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.r),
+                ),
+                fixedSize: Size(55.r, 35.r),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: Size.zero,
+              ),
               child: Text(!_isEn ? 'EN' : 'አማ'),
             ),
           ),
@@ -78,14 +80,18 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           AppLocalizations.of(context)!.welcome,
                           style: TextStyle(
-                              color: primaryColor,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold),
+                            color: primaryColor,
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Text(
                         AppLocalizations.of(context)!.cbeNoor,
-                        style: TextStyle(color: primaryColor, fontSize: 18.sp),
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 18.sp,
+                        ),
                       ),
                     ],
                   ),
@@ -95,7 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.only(top: 30.h),
                         child: Text(
                           AppLocalizations.of(context)!.pin,
-                          style: TextStyle(color: primaryColor),
+                          style: const TextStyle(
+                            color: primaryColor,
+                          ),
                         ),
                       ),
                       Padding(
@@ -106,24 +114,28 @@ class _LoginPageState extends State<LoginPage> {
                           maxLength: 4,
                           keyboardType: TextInputType.number,
                           obscureText: true,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
+                          inputFormatters: const [
+                            FilteringTextInputFormatter.digitsOnly,
                           ],
                           decoration: InputDecoration(
-                              counterText: '',
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: primaryColor, width: 2),
+                            counterText: '',
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: primaryColor,
+                                width: 2,
                               ),
-                              errorText: pinController.text.isEmpty
-                                  ? null
-                                  : _validate
-                                      ? null
-                                      : 'Invalid password'),
+                            ),
+                            errorText: pinController.text.isEmpty
+                                ? null
+                                : _validate
+                                    ? null
+                                    : 'Invalid password',
+                          ),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 30.h),
+                        // ignore: prefer_const_constructors
                         child: TextButton(
                           onPressed: () {
                             if (pinController.text != '0000') {
@@ -137,24 +149,30 @@ class _LoginPageState extends State<LoginPage> {
                             }
 
                             if (_validate) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const MainApp()));
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const MainApp(),
+                                ),
+                              );
                             }
                           },
                           style: TextButton.styleFrom(
                             elevation: 6,
                             padding: EdgeInsets.only(
-                                top: 20.r,
-                                bottom: 20.r,
-                                left: 21.r,
-                                right: 19.r),
+                              top: 20.r,
+                              bottom: 20.r,
+                              left: 21.r,
+                              right: 19.r,
+                            ),
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             minimumSize: Size.zero,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.r)),
+                              borderRadius: BorderRadius.circular(50.r),
+                            ),
                             backgroundColor: secondaryColor,
                             foregroundColor: Colors.white,
                           ),
+                          // ignore: prefer_const_constructors
                           child: Icon(
                             Icons.arrow_forward_ios,
                             size: 18.sp,
@@ -167,9 +185,12 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.only(bottom: 60.h, top: 40.h),
                     child: Text(
                       AppLocalizations.of(context)!.copyright,
-                      style: TextStyle(fontSize: 16.sp, color: primaryColor),
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: primaryColor,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
