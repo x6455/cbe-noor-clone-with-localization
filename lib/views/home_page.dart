@@ -112,7 +112,7 @@ class _BalanceCardState extends State<BalanceCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${_isVisible ? '65,000' : '*****'} ${AppLocalizations.of(context)!.birr}',
+                    '${_isVisible ? '183,342.86' : '*****'} ${AppLocalizations.of(context)!.birr}',
                     style: TextStyle(
                       fontSize: 40.sp,
                       color: Colors.white,
@@ -135,7 +135,7 @@ class _BalanceCardState extends State<BalanceCard> {
               ),
             ),
             Text(
-              'Wadiah   - 1000${_isVisible ? '12345' : '*****'}6789',
+              'Wadiah   - 1000${_isVisible ? '12345' : '*****'}5355',
               style: TextStyle(fontSize: 18.sp, color: Colors.yellow),
             ),
             Padding(
