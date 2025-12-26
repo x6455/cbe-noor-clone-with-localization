@@ -31,18 +31,15 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (Navigator.of(context).userGestureInProgress) {
-          return false;
-        } else {
-          return true;
-        }
-      },
+    return PopScope(
+      canPop: false, // Prevents back gesture
       child: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/bg.png'), fit: BoxFit.cover)),
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Scaffold(
           key: _key,
           drawerEnableOpenDragGesture: _selectedIndex != 0 ? false : true,
@@ -62,19 +59,17 @@ class _MainAppState extends State<MainApp> {
                 }
               },
               child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, anim) => RotationTransition(
-                        turns: child.key == ValueKey('icon1')
-                            ? Tween<double>(begin: 1, end: 0.75).animate(anim)
-                            : Tween<double>(begin: 0.75, end: 1).animate(anim),
-                        child: FadeTransition(opacity: anim, child: child),
-                      ),
-                  child: _selectedIndex != 0
-                      ? Icon(Icons.arrow_upward, key: const ValueKey('icon1'))
-                      : Icon(
-                          Icons.menu,
-                          key: const ValueKey('icon2'),
-                        )),
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, anim) => RotationTransition(
+                  turns: child.key == const ValueKey('icon1')
+                      ? Tween<double>(begin: 1, end: 0.75).animate(anim)
+                      : Tween<double>(begin: 0.75, end: 1).animate(anim),
+                  child: FadeTransition(opacity: anim, child: child),
+                ),
+                child: _selectedIndex != 0
+                    ? const Icon(Icons.arrow_upward, key: ValueKey('icon1'))
+                    : const Icon(Icons.menu, key: ValueKey('icon2')),
+              ),
             ),
             systemOverlayStyle: SystemUiOverlayStyle.dark,
             backgroundColor: Colors.transparent,
@@ -89,21 +84,25 @@ class _MainAppState extends State<MainApp> {
                   MyApp.setLocale(context, _isEn);
                 },
                 style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.r)),
-                    fixedSize: Size(55.r, 35.r),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size.zero),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                  fixedSize: Size(55.r, 35.r),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: Size.zero,
+                ),
                 child: Text(!_isEn ? 'EN' : 'አማ'),
               ),
               TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.r)),
-                    fixedSize: Size(55.r, 35.r),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size.zero),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                  fixedSize: Size(55.r, 35.r),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: Size.zero,
+                ),
                 child: Icon(
                   Icons.refresh,
                   size: 26.sp,
@@ -121,105 +120,47 @@ class _MainAppState extends State<MainApp> {
                 const DrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/images/drawerImg.jpg'),
-                        fit: BoxFit.cover),
+                      image: AssetImage('assets/images/drawerImg.jpg'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   child: SizedBox(),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.password,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.changePin,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  leading: Icon(Icons.password, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.changePin, style: TextStyle(fontSize: 16.sp)),
+                  onTap: () => Navigator.pop(context),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.devices_rounded,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.unsubscribe,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  leading: Icon(Icons.devices_rounded, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.unsubscribe, style: TextStyle(fontSize: 16.sp)),
+                  onTap: () => Navigator.pop(context),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.power_settings_new,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.logout,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
+                  leading: Icon(Icons.power_settings_new, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.logout, style: TextStyle(fontSize: 16.sp)),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LoginPage())),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.info_outlined,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.about,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  leading: Icon(Icons.info_outlined, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.about, style: TextStyle(fontSize: 16.sp)),
+                  onTap: () => Navigator.pop(context),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.star_border,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.rateThisApp,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  leading: Icon(Icons.star_border, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.rateThisApp, style: TextStyle(fontSize: 16.sp)),
+                  onTap: () => Navigator.pop(context),
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.price_change_outlined,
-                    color: primaryColor,
-                    size: 28.sp,
-                  ),
-                  title: Text(
-                    AppLocalizations.of(context)!.cbeNoor,
-                    style: TextStyle(fontSize: 16.sp),
-                  ),
+                  leading: Icon(Icons.price_change_outlined, color: primaryColor, size: 28.sp),
+                  title: Text(AppLocalizations.of(context)!.cbeNoor, style: TextStyle(fontSize: 16.sp)),
                   trailing: Switch(
                     activeColor: secondaryColor,
                     inactiveThumbColor: Colors.grey[300],
                     value: _switch,
-                    onChanged: (val) {
-                      setState(() {
-                        _switch = !_switch;
-                      });
-                    },
+                    onChanged: (val) => setState(() => _switch = !_switch),
                   ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  onTap: () => Navigator.pop(context),
                 ),
               ],
             ),
@@ -227,14 +168,17 @@ class _MainAppState extends State<MainApp> {
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.apps),
-                  label: AppLocalizations.of(context)!.home),
+                icon: const Icon(Icons.apps),
+                label: AppLocalizations.of(context)!.home,
+              ),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.account_balance),
-                  label: AppLocalizations.of(context)!.accounts),
+                icon: const Icon(Icons.account_balance),
+                label: AppLocalizations.of(context)!.accounts,
+              ),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.history),
-                  label: AppLocalizations.of(context)!.recents),
+                icon: const Icon(Icons.history),
+                label: AppLocalizations.of(context)!.recents,
+              ),
             ],
             selectedFontSize: 16.sp,
             unselectedFontSize: 14.sp,
@@ -243,11 +187,7 @@ class _MainAppState extends State<MainApp> {
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.grey[300],
             backgroundColor: primaryColor,
-            onTap: (val) {
-              setState(() {
-                _selectedIndex = val;
-              });
-            },
+            onTap: (val) => setState(() => _selectedIndex = val),
           ),
         ),
       ),
