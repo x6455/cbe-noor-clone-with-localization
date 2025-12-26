@@ -142,21 +142,20 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           style: TextButton.styleFrom(
-  elevation: 6,
-  padding: EdgeInsets.only(
-      top: 20.r,
-      bottom: 20.r,
-      left: 21.r,
-      right: 19.r),
-  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-  minimumSize: Size.zero,
-  shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(50.r)),
-  backgroundColor: secondaryColor,
-  foregroundColor: Colors.white,
-),
+                            elevation: 6,
+                            padding: EdgeInsets.only(
+                                top: 20.r,
+                                bottom: 20.r,
+                                left: 21.r,
+                                right: 19.r),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            minimumSize: Size.zero,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.r)),
+                            backgroundColor: secondaryColor,
+                            foregroundColor: Colors.white,
                           ),
-
+                        ),
                       ),
                     ],
                   ),
