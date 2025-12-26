@@ -155,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
   backgroundColor: secondaryColor,
   foregroundColor: Colors.white,
 ),
+                          ),
 
                       ),
                     ],
