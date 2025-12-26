@@ -13,15 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: actions/setup-flutter@v3
         with:
-          flutter-version: 'stable'
+          channel: 'stable'
+
+      - name: Check Flutter version
+        run: flutter --version
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Verify formatting
-        run: flutter format --output=none --set-exit-if-changed .
+        run: flutter format --set-exit-if-changed .
 
       - name: Analyze project source
         run: flutter analyze --fatal-infos
@@ -29,5 +33,5 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build for web
-        run: flutter build web
+      - name: Build for Android
+        run: flutter build apk --release
