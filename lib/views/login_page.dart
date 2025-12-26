@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
 
                             if (_validate) {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => MainApp()));
+                                  builder: (context) => const MainApp()));
                             }
                           },
                           style: TextButton.styleFrom(
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor: secondaryColor,
                             foregroundColor: Colors.white,
                           ),
-                          child: Icon(Icons.arrow_forward_ios, size: 18.sp),
+                          child: const Icon(Icons.arrow_forward_ios, size: 18.sp),
                         ),
                       ),
                     ],
