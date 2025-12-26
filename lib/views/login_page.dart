@@ -114,17 +114,19 @@ class _LoginPageState extends State<LoginPage> {
                           maxLength: 4,
                           keyboardType: TextInputType.number,
                           obscureText: true,
-                          inputFormatters: const [
+                          inputFormatters: [
+                            // must NOT be const – this fixes non_constant_list_element
                             FilteringTextInputFormatter.digitsOnly,
                           ],
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             counterText: '',
-                            enabledBorder: const UnderlineInputBorder(
+                            enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: primaryColor,
                                 width: 2,
                               ),
                             ),
+                          ).copyWith(
                             errorText: pinController.text.isEmpty
                                 ? null
                                 : _validate
