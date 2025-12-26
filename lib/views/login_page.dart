@@ -155,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor: secondaryColor,
                             foregroundColor: Colors.white,
                           ),
+                          child: Icon(Icons.arrow_forward_ios, size: 18.sp),
                         ),
                       ),
                     ],
