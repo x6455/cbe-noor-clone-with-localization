@@ -14,8 +14,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static void setLocale(BuildContext context, bool isEn) {
-    final _MyAppState? state =
-        context.findAncestorStateOfType<_MyAppState>();
+    final _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.setLocale(isEn);
   }
 }
