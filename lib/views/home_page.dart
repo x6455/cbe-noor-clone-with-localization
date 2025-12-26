@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
               child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 200,
                       childAspectRatio: 3 / 2,
@@ -47,18 +47,22 @@ class HomePage extends StatelessWidget {
                     return TextButton(
                       onPressed: () {},
                       style: TextButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 1.5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r)
-                        )
-                      ),
+                          backgroundColor: Colors.white,
+                          elevation: 1.5,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r))),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(btns[index][1], size: 42.sp,),
+                          Icon(
+                            btns[index][1],
+                            size: 42.sp,
+                          ),
                           SizedBox(height: 10.h),
-                          Text(btns[index][0], style: TextStyle(fontSize: 18.sp),),
+                          Text(
+                            btns[index][0],
+                            style: TextStyle(fontSize: 18.sp),
+                          ),
                         ],
                       ),
                     );
@@ -137,7 +141,8 @@ class _BalanceCardState extends State<BalanceCard> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h),
               child: Text(
-                DateFormat('MMM d, yyyy  h:mm:ss a', locale).format(DateTime.now()),
+                DateFormat('MMM d, yyyy  h:mm:ss a', locale)
+                    .format(DateTime.now()),
                 style: TextStyle(fontSize: 14.sp, color: Colors.white),
               ),
             )

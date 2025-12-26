@@ -226,11 +226,15 @@ class _MainAppState extends State<MainApp> {
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: [
-              BottomNavigationBarItem(icon: const Icon(Icons.apps), label: AppLocalizations.of(context)!.home),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.account_balance), label: AppLocalizations.of(context)!.accounts),
+                  icon: const Icon(Icons.apps),
+                  label: AppLocalizations.of(context)!.home),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.history), label: AppLocalizations.of(context)!.recents),
+                  icon: const Icon(Icons.account_balance),
+                  label: AppLocalizations.of(context)!.accounts),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.history),
+                  label: AppLocalizations.of(context)!.recents),
             ],
             selectedFontSize: 16.sp,
             unselectedFontSize: 14.sp,

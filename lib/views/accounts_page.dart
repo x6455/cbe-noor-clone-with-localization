@@ -106,7 +106,9 @@ class TransactionList extends StatelessWidget {
                       ),
               ),
               title: Text(
-                transactions[index].isWithdraw ? AppLocalizations.of(context)!.withdrawal : AppLocalizations.of(context)!.deposit,
+                transactions[index].isWithdraw
+                    ? AppLocalizations.of(context)!.withdrawal
+                    : AppLocalizations.of(context)!.deposit,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.sp,
@@ -114,7 +116,8 @@ class TransactionList extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                DateFormat('MMM d, yyyy', locale).format(transactions[index].transDate),
+                DateFormat('MMM d, yyyy', locale)
+                    .format(transactions[index].transDate),
               ),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

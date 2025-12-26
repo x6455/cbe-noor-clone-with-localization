@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en', '');
 
-  setLocale(bool isEn){
+  setLocale(bool isEn) {
     setState(() {
       if (isEn) {
         _locale = const Locale('en', '');
