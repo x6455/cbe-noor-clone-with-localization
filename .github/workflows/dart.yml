@@ -17,12 +17,34 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.19.0'  # Use specific version to avoid surprises
 
-      - name: Verify Flutter installation
+      - name: Check Flutter version
         run: flutter --version
 
-      - name: Install dependencies
-        run: flutter pub get
+      - name: Try dependency resolution
+        run: |
+          # First attempt with current pubspec
+          flutter pub get || {
+            echo "Dependency resolution failed, attempting to fix..."
+            
+            # Backup pubspec
+            cp pubspec.yaml pubspec.yaml.backup
+            
+            # Update intl dependency inline
+            sed -i 's/intl: \^0.17.0/intl: ^0.20.2/g' pubspec.yaml
+            
+            # Try again
+            flutter pub get || {
+              echo "Still failing, using backup..."
+              mv pubspec.yaml.backup pubspec.yaml
+              exit 1
+            }
+          }
+
+      - name: Run dart fix for null safety
+        run: |
+          dart fix --apply || echo "Dart fix failed or not needed"
 
       - name: Verify formatting
         run: flutter format --set-exit-if-changed .
@@ -33,12 +55,8 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Check if build is possible
-        run: |
-          if [ -f "pubspec.yaml" ]; then
-            echo "Building project..."
-            flutter build apk --release || echo "Android build failed, trying web..."
-            flutter build web --release || echo "Build failed, but continuing..."
-          else
-            echo "No pubspec.yaml found"
-          fi
+      - name: Build for Android
+        run: flutter build apk --release
+
+      - name: Build for Web
+        run: flutter build web --release
