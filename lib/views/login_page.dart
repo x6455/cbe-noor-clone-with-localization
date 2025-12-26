@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                 MyApp.setLocale(context, _isEn);
               },
               style: TextButton.styleFrom(
-                  shape: const RoundedRectangleBorder(
+                  shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.r)),
                   fixedSize: Size(55.r, 35.r),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -111,8 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                           decoration: InputDecoration(
                               counterText: '',
-                              enabledBorder: const UnderlineInputBorder(
-                                borderSide: const BorderSide(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
                                     color: primaryColor, width: 2),
                               ),
                               errorText: pinController.text.isEmpty
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                                 right: 19.r),
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             minimumSize: Size.zero,
-                            shape: const RoundedRectangleBorder(
+                            shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.r)),
                             backgroundColor: secondaryColor,
                             foregroundColor: Colors.white,
