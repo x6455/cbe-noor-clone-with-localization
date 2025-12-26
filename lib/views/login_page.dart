@@ -112,8 +112,8 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                               counterText: '',
                               enabledBorder: const UnderlineInputBorder(
-                                borderSide:
-                                   const BorderSide(color: primaryColor, width: 2),
+                                borderSide: const BorderSide(
+                                    color: primaryColor, width: 2),
                               ),
                               errorText: pinController.text.isEmpty
                                   ? null
